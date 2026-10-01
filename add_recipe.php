@@ -10,11 +10,9 @@ $cookingTime = filter_input(INPUT_POST, 'cookingTime', FILTER_VALIDATE_INT);
 
 $image_dir = __DIR__ . '/images';
 $image = $_FILES['recipeImage'];
-$image_name = $image['name'];
 
 if ($recipeName == null || $category == null ||
-    $mainIngredient == null || $cookingTime == null ||
-    $image_name == null) {
+    $mainIngredient == null || $cookingTime == null) {
 
     $_SESSION["add_error"] = "Invalid recipe data. Check all fields and try again.";
 
@@ -22,12 +20,23 @@ if ($recipeName == null || $category == null ||
     exit();
 }
 
-$image_temp = $image['tmp_name'];
-$image_path = $image_dir . DIRECTORY_SEPARATOR . $image_name;
+if ($image && $image['error'] == UPLOAD_ERR_OK) {
 
-move_uploaded_file($image_temp, $image_path);
+    $image_name = $image['name'];
+    $image_temp = $image['tmp_name'];
+    $image_path = $image_dir . DIRECTORY_SEPARATOR . $image_name;
 
-process_image($image_dir, $image_name);
+    move_uploaded_file($image_temp, $image_path);
+
+    process_image($image_dir, $image_name);
+
+    $i = strrpos($image_name, '.');
+    $image_name = substr($image_name, 0, $i) . '_100' . substr($image_name, $i);
+
+} else {
+
+    $image_name = 'placeholder_100.jpg';
+}
 
 $query = 'INSERT INTO recipes
              (recipeName, category, mainIngredient, cookingTime, recipeImage)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 01, 2026 at 08:53 AM
+-- Generation Time: Oct 01, 2026 at 10:30 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,10 +41,12 @@ CREATE TABLE `recipes` (
 --
 
 INSERT INTO `recipes` (`recipeID`, `recipeName`, `category`, `mainIngredient`, `cookingTime`, `recipeImage`) VALUES
-(1, 'Chicken Adobo', 'Main Dish', 'Chicken', 50, NULL),
+(1, 'Chicken Adobo', 'Main Dish', 'Chicken', 55, NULL),
 (2, 'Beef Caldereta', 'Main Dish', 'Beef', 90, NULL),
 (4, 'Pork Sinigang', 'Main Dish', 'Pork', 60, NULL),
-(5, 'Pork Dinuguan', 'Main Dish', 'Pork', 60, NULL);
+(5, 'Pork Dinuguan', 'Main Dish', 'Pork', 60, NULL),
+(9, 'Chicken Tinola', 'Main Dish', 'Chicken', 50, 'placeholder_100.jpg'),
+(10, 'Bicol Express', 'Main Dish', 'Pork', 60, 'Bicol Express_100.png');
 
 --
 -- Indexes for dumped tables
@@ -64,7 +66,7 @@ ALTER TABLE `recipes`
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `recipeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `recipeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

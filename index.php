@@ -40,15 +40,7 @@ $statement->closeCursor();
                 <tr>
                     <td>
                         <?php if ($recipe['recipeImage'] != null) : ?>
-                            <?php
-                            $image_name = $recipe['recipeImage'];
-                            $i = strrpos($image_name, '.');
-                            $name = substr($image_name, 0, $i);
-                            $ext = substr($image_name, $i);
-                            $thumbnail = $name . '_100' . $ext;
-                            ?>
-
-                            <img src="images/<?php echo $thumbnail; ?>"
+                            <img src="images/<?php echo $recipe['recipeImage']; ?>"
                                  alt="<?php echo $recipe['recipeName']; ?>">
                         <?php endif; ?>
                     </td>

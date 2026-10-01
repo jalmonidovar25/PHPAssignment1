@@ -29,17 +29,11 @@ $statement->closeCursor();
     <main>
         <h2>Update Recipe</h2>
 
-        <form action="update_recipe.php"
-              method="post"
-              enctype="multipart/form-data">
+        <form action="update_recipe.php" method="post">
 
             <input type="hidden"
                    name="recipeID"
                    value="<?php echo $recipe['recipeID']; ?>">
-
-            <input type="hidden"
-                   name="oldImage"
-                   value="<?php echo $recipe['recipeImage']; ?>">
 
             <label>Recipe Name:</label>
             <input type="text"
@@ -63,10 +57,6 @@ $statement->closeCursor();
             <input type="number"
                    name="cookingTime"
                    value="<?php echo $recipe['cookingTime']; ?>">
-            <br>
-
-            <label>Recipe Image:</label>
-            <input type="file" name="recipeImage">
             <br>
 
             <input type="submit" value="Update Recipe">
