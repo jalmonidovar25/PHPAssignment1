@@ -27,19 +27,46 @@ $statement->closeCursor();
 
         <table>
             <tr>
+                <th>Image</th>
                 <th>Recipe Name</th>
                 <th>Category</th>
                 <th>Main Ingredient</th>
                 <th>Cooking Time</th>
                 <th>&nbsp;</th>
+                <th>&nbsp;</th>
             </tr>
 
             <?php foreach ($recipes as $recipe) : ?>
                 <tr>
+                    <td>
+                        <?php if ($recipe['recipeImage'] != null) : ?>
+                            <?php
+                            $image_name = $recipe['recipeImage'];
+                            $i = strrpos($image_name, '.');
+                            $name = substr($image_name, 0, $i);
+                            $ext = substr($image_name, $i);
+                            $thumbnail = $name . '_100' . $ext;
+                            ?>
+
+                            <img src="images/<?php echo $thumbnail; ?>"
+                                 alt="<?php echo $recipe['recipeName']; ?>">
+                        <?php endif; ?>
+                    </td>
+
                     <td><?php echo $recipe['recipeName']; ?></td>
                     <td><?php echo $recipe['category']; ?></td>
                     <td><?php echo $recipe['mainIngredient']; ?></td>
                     <td><?php echo $recipe['cookingTime']; ?> minutes</td>
+
+                    <td>
+                        <form action="update_recipe_form.php" method="post">
+                            <input type="hidden"
+                                   name="recipeID"
+                                   value="<?php echo $recipe['recipeID']; ?>">
+
+                            <input type="submit" value="Update">
+                        </form>
+                    </td>
 
                     <td>
                         <form action="delete_recipe.php" method="post">

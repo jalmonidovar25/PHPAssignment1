@@ -15,7 +15,7 @@
     <main>
         <h2>Add Recipe</h2>
 
-        <form action="add_recipe.php" method="post">
+        <form action="add_recipe.php" method="post" enctype="multipart/form-data">
 
             <label>Recipe Name:</label>
             <input type="text" name="recipeName">
@@ -31,6 +31,10 @@
 
             <label>Cooking Time:</label>
             <input type="number" name="cookingTime">
+            <br>
+
+            <label>Recipe Image:</label>
+            <input type="file" name="recipeImage">
             <br>
 
             <input type="submit" value="Add Recipe">

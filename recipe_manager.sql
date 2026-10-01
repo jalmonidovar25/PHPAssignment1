@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 25, 2026 at 05:24 PM
+-- Generation Time: Oct 01, 2026 at 08:53 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,18 +32,19 @@ CREATE TABLE `recipes` (
   `recipeName` varchar(100) NOT NULL,
   `category` varchar(50) NOT NULL,
   `mainIngredient` varchar(100) NOT NULL,
-  `cookingTime` int(11) NOT NULL
+  `cookingTime` int(11) NOT NULL,
+  `recipeImage` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `recipes`
 --
 
-INSERT INTO `recipes` (`recipeID`, `recipeName`, `category`, `mainIngredient`, `cookingTime`) VALUES
-(1, 'Chicken Adobo', 'Main Dish', 'Chicken', 45),
-(2, 'Beef Caldereta', 'Main Dish', 'Beef', 90),
-(4, 'Pork Sinigang', 'Main Dish', 'Pork', 60),
-(5, 'Pork Dinuguan', 'Main Dish', 'Pork', 60);
+INSERT INTO `recipes` (`recipeID`, `recipeName`, `category`, `mainIngredient`, `cookingTime`, `recipeImage`) VALUES
+(1, 'Chicken Adobo', 'Main Dish', 'Chicken', 50, NULL),
+(2, 'Beef Caldereta', 'Main Dish', 'Beef', 90, NULL),
+(4, 'Pork Sinigang', 'Main Dish', 'Pork', 60, NULL),
+(5, 'Pork Dinuguan', 'Main Dish', 'Pork', 60, NULL);
 
 --
 -- Indexes for dumped tables
@@ -63,7 +64,7 @@ ALTER TABLE `recipes`
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `recipeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `recipeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
