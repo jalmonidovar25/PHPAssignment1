@@ -1,3 +1,4 @@
+
 <?php
 require('database.php');
 
@@ -29,7 +30,7 @@ $statement->closeCursor();
     <main>
         <h2>Update Recipe</h2>
 
-        <form action="update_recipe.php" method="post">
+        <form action="update_recipe.php" method="post" enctype="multipart/form-data">
 
             <input type="hidden"
                    name="recipeID"
@@ -38,25 +39,34 @@ $statement->closeCursor();
             <label>Recipe Name:</label>
             <input type="text"
                    name="recipeName"
-                   value="<?php echo $recipe['recipeName']; ?>">
+                   value="<?php echo htmlspecialchars($recipe['recipeName']); ?>">
             <br>
 
             <label>Category:</label>
             <input type="text"
                    name="category"
-                   value="<?php echo $recipe['category']; ?>">
+                   value="<?php echo htmlspecialchars($recipe['category']); ?>">
             <br>
 
             <label>Main Ingredient:</label>
             <input type="text"
                    name="mainIngredient"
-                   value="<?php echo $recipe['mainIngredient']; ?>">
+                   value="<?php echo htmlspecialchars($recipe['mainIngredient']); ?>">
             <br>
 
             <label>Cooking Time:</label>
             <input type="number"
                    name="cookingTime"
                    value="<?php echo $recipe['cookingTime']; ?>">
+            <br>
+
+            <label>Current Image:</label>
+            <img src="images/<?php echo htmlspecialchars($recipe['recipeImage']); ?>"
+                 alt="<?php echo htmlspecialchars($recipe['recipeName']); ?>">
+            <br>
+
+            <label>New Image:</label>
+            <input type="file" name="recipeImage" accept="image/jpeg,image/png,image/gif">
             <br>
 
             <input type="submit" value="Update Recipe">

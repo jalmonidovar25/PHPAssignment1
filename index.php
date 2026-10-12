@@ -1,3 +1,4 @@
+
 <?php
 require('database.php');
 
@@ -34,21 +35,33 @@ $statement->closeCursor();
                 <th>Cooking Time</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
+                <th>&nbsp;</th>
             </tr>
 
             <?php foreach ($recipes as $recipe) : ?>
                 <tr>
                     <td>
                         <?php if ($recipe['recipeImage'] != null) : ?>
-                            <img src="images/<?php echo $recipe['recipeImage']; ?>"
-                                 alt="<?php echo $recipe['recipeName']; ?>">
+                            <img src="images/<?php echo htmlspecialchars($recipe['recipeImage']); ?>"
+                                 alt="<?php echo htmlspecialchars($recipe['recipeName']); ?>">
                         <?php endif; ?>
                     </td>
 
-                    <td><?php echo $recipe['recipeName']; ?></td>
-                    <td><?php echo $recipe['category']; ?></td>
-                    <td><?php echo $recipe['mainIngredient']; ?></td>
+                    <td>
+                        <a href="recipe_details.php?recipeID=<?php echo $recipe['recipeID']; ?>">
+                            <?php echo htmlspecialchars($recipe['recipeName']); ?>
+                        </a>
+                    </td>
+
+                    <td><?php echo htmlspecialchars($recipe['category']); ?></td>
+                    <td><?php echo htmlspecialchars($recipe['mainIngredient']); ?></td>
                     <td><?php echo $recipe['cookingTime']; ?> minutes</td>
+
+                    <td>
+                        <a href="recipe_details.php?recipeID=<?php echo $recipe['recipeID']; ?>">
+                            View Details
+                        </a>
+                    </td>
 
                     <td>
                         <form action="update_recipe_form.php" method="post">
