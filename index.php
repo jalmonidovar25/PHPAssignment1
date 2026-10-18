@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 require('database.php');
 
 $query = 'SELECT * FROM recipes';
@@ -21,6 +22,28 @@ $statement->closeCursor();
 
     <header>
         <h1>Recipe Manager</h1>
+
+        <?php if (isset($_SESSION['userID'])) : ?>
+
+            <p>
+                Welcome,
+                <?php echo htmlspecialchars($_SESSION['userName']); ?>!
+            </p>
+
+            <p>
+                <a href="logout.php" style="color: white;">Logout</a>
+            </p>
+
+        <?php else : ?>
+
+            <p>
+                <a href="login_form.php" style="color: white;">Login</a>
+                |
+                <a href="registration_form.php" style="color: white;">Register</a>
+            </p>
+
+        <?php endif; ?>
+
     </header>
 
     <main>
@@ -34,8 +57,11 @@ $statement->closeCursor();
                 <th>Main Ingredient</th>
                 <th>Cooking Time</th>
                 <th>&nbsp;</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
+
+                <?php if (isset($_SESSION['userID'])) : ?>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                <?php endif; ?>
             </tr>
 
             <?php foreach ($recipes as $recipe) : ?>
@@ -55,7 +81,7 @@ $statement->closeCursor();
 
                     <td><?php echo htmlspecialchars($recipe['category']); ?></td>
                     <td><?php echo htmlspecialchars($recipe['mainIngredient']); ?></td>
-                    <td><?php echo $recipe['cookingTime']; ?> minutes</td>
+                    <td><?php echo htmlspecialchars($recipe['cookingTime']); ?> minutes</td>
 
                     <td>
                         <a href="recipe_details.php?recipeID=<?php echo $recipe['recipeID']; ?>">
@@ -63,31 +89,38 @@ $statement->closeCursor();
                         </a>
                     </td>
 
-                    <td>
-                        <form action="update_recipe_form.php" method="post">
-                            <input type="hidden"
-                                   name="recipeID"
-                                   value="<?php echo $recipe['recipeID']; ?>">
+                    <?php if (isset($_SESSION['userID'])) : ?>
 
-                            <input type="submit" value="Update">
-                        </form>
-                    </td>
+                        <td>
+                            <form action="update_recipe_form.php" method="post">
+                                <input type="hidden"
+                                       name="recipeID"
+                                       value="<?php echo $recipe['recipeID']; ?>">
 
-                    <td>
-                        <form action="delete_recipe.php" method="post">
-                            <input type="hidden"
-                                   name="recipeID"
-                                   value="<?php echo $recipe['recipeID']; ?>">
+                                <input type="submit" value="Update">
+                            </form>
+                        </td>
 
-                            <input type="submit" value="Delete">
-                        </form>
-                    </td>
+                        <td>
+                            <form action="delete_recipe.php" method="post">
+                                <input type="hidden"
+                                       name="recipeID"
+                                       value="<?php echo $recipe['recipeID']; ?>">
+
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
+
+                    <?php endif; ?>
+
                 </tr>
             <?php endforeach; ?>
 
         </table>
 
-        <p><a href="add_recipe_form.php">Add Recipe</a></p>
+        <?php if (isset($_SESSION['userID'])) : ?>
+            <p><a href="add_recipe_form.php">Add Recipe</a></p>
+        <?php endif; ?>
 
     </main>
 

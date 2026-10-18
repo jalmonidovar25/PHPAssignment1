@@ -1,6 +1,12 @@
 
 <?php
 session_start();
+
+if (!isset($_SESSION['userID'])) {
+    header('Location: login_form.php');
+    exit();
+}
+
 require('database.php');
 require('image_util.php');
 

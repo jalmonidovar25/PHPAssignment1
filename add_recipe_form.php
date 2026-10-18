@@ -1,3 +1,13 @@
+
+<?php
+session_start();
+
+if (!isset($_SESSION['userID'])) {
+    header('Location: login_form.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -42,6 +52,7 @@
         </form>
 
         <p><a href="index.php">View Recipe List</a></p>
+
     </main>
 
     <footer>

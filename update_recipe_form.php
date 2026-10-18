@@ -1,8 +1,20 @@
 
 <?php
+session_start();
+
+if (!isset($_SESSION['userID'])) {
+    header('Location: login_form.php');
+    exit();
+}
+
 require('database.php');
 
 $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT);
+
+if (!$recipeID) {
+    header('Location: index.php');
+    exit();
+}
 
 $query = 'SELECT * FROM recipes
           WHERE recipeID = :recipeID';
@@ -11,6 +23,11 @@ $statement->bindValue(':recipeID', $recipeID);
 $statement->execute();
 $recipe = $statement->fetch();
 $statement->closeCursor();
+
+if ($recipe == false) {
+    header('Location: index.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +83,9 @@ $statement->closeCursor();
             <br>
 
             <label>New Image:</label>
-            <input type="file" name="recipeImage" accept="image/jpeg,image/png,image/gif">
+            <input type="file"
+                   name="recipeImage"
+                   accept="image/jpeg,image/png,image/gif">
             <br>
 
             <input type="submit" value="Update Recipe">

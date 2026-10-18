@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 01, 2026 at 10:30 AM
+-- Generation Time: Oct 18, 2026 at 10:04 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,12 +41,27 @@ CREATE TABLE `recipes` (
 --
 
 INSERT INTO `recipes` (`recipeID`, `recipeName`, `category`, `mainIngredient`, `cookingTime`, `recipeImage`) VALUES
-(1, 'Chicken Adobo', 'Main Dish', 'Chicken', 55, NULL),
-(2, 'Beef Caldereta', 'Main Dish', 'Beef', 90, NULL),
-(4, 'Pork Sinigang', 'Main Dish', 'Pork', 60, NULL),
-(5, 'Pork Dinuguan', 'Main Dish', 'Pork', 60, NULL),
-(9, 'Chicken Tinola', 'Main Dish', 'Chicken', 50, 'placeholder_100.jpg'),
+(1, 'Chicken Adobo', 'Main Dish', 'Chicken', 55, 'recipe_6acd1697406c76.75311686_100.png'),
+(2, 'Beef Caldereta', 'Main Dish', 'Beef', 90, 'recipe_6acd16be6aecd7.59142416_100.png'),
+(4, 'Pork Sinigang', 'Main Dish', 'Pork', 60, 'recipe_6acd16d8945e89.35872938_100.png'),
+(5, 'Pork Dinuguan', 'Main Dish', 'Pork', 60, 'recipe_6acd142266c0f7.03585653_100.png'),
+(9, 'Chicken Tinola', 'Main Dish', 'Chicken', 50, 'recipe_6acd14f765d270.39604281_100.png'),
 (10, 'Bicol Express', 'Main Dish', 'Pork', 60, 'Bicol Express_100.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `registrations`
+--
+
+CREATE TABLE `registrations` (
+  `userID` int(4) NOT NULL,
+  `userName` varchar(50) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `emailAddress` varchar(50) NOT NULL,
+  `failedAttempts` int(4) DEFAULT NULL,
+  `lastFailedLogin` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -59,6 +74,12 @@ ALTER TABLE `recipes`
   ADD PRIMARY KEY (`recipeID`);
 
 --
+-- Indexes for table `registrations`
+--
+ALTER TABLE `registrations`
+  ADD PRIMARY KEY (`userID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -67,6 +88,12 @@ ALTER TABLE `recipes`
 --
 ALTER TABLE `recipes`
   MODIFY `recipeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `registrations`
+--
+ALTER TABLE `registrations`
+  MODIFY `userID` int(4) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

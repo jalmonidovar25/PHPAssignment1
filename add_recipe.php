@@ -1,5 +1,12 @@
+
 <?php
 session_start();
+
+if (!isset($_SESSION['userID'])) {
+    header('Location: login_form.php');
+    exit();
+}
+
 require('database.php');
 require('image_util.php');
 
@@ -9,7 +16,7 @@ $mainIngredient = filter_input(INPUT_POST, 'mainIngredient');
 $cookingTime = filter_input(INPUT_POST, 'cookingTime', FILTER_VALIDATE_INT);
 
 $image_dir = __DIR__ . '/images';
-$image = $_FILES['recipeImage'];
+$image = $_FILES['recipeImage'] ?? null;
 
 if ($recipeName == null || $category == null ||
     $mainIngredient == null || $cookingTime == null) {
@@ -53,4 +60,5 @@ $statement->execute();
 $statement->closeCursor();
 
 header('Location: add_recipe_confirmation.php');
+exit();
 ?>
