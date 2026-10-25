@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 18, 2026 at 10:04 PM
+-- Generation Time: Oct 25, 2026 at 11:53 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,20 +33,22 @@ CREATE TABLE `recipes` (
   `category` varchar(50) NOT NULL,
   `mainIngredient` varchar(100) NOT NULL,
   `cookingTime` int(11) NOT NULL,
-  `recipeImage` varchar(255) DEFAULT NULL
+  `recipeImage` varchar(255) DEFAULT NULL,
+  `userID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `recipes`
 --
 
-INSERT INTO `recipes` (`recipeID`, `recipeName`, `category`, `mainIngredient`, `cookingTime`, `recipeImage`) VALUES
-(1, 'Chicken Adobo', 'Main Dish', 'Chicken', 55, 'recipe_6acd1697406c76.75311686_100.png'),
-(2, 'Beef Caldereta', 'Main Dish', 'Beef', 90, 'recipe_6acd16be6aecd7.59142416_100.png'),
-(4, 'Pork Sinigang', 'Main Dish', 'Pork', 60, 'recipe_6acd16d8945e89.35872938_100.png'),
-(5, 'Pork Dinuguan', 'Main Dish', 'Pork', 60, 'recipe_6acd142266c0f7.03585653_100.png'),
-(9, 'Chicken Tinola', 'Main Dish', 'Chicken', 50, 'recipe_6acd14f765d270.39604281_100.png'),
-(10, 'Bicol Express', 'Main Dish', 'Pork', 60, 'Bicol Express_100.png');
+INSERT INTO `recipes` (`recipeID`, `recipeName`, `category`, `mainIngredient`, `cookingTime`, `recipeImage`, `userID`) VALUES
+(1, 'Chicken Adobo', 'Main Dish', 'Chicken', 55, 'recipe_6acd1697406c76.75311686_100.png', 1),
+(2, 'Beef Caldereta', 'Main Dish', 'Beef', 90, 'recipe_6acd16be6aecd7.59142416_100.png', 1),
+(4, 'Pork Sinigang', 'Main Dish', 'Pork', 60, 'recipe_6acd16d8945e89.35872938_100.png', 1),
+(5, 'Pork Dinuguan', 'Main Dish', 'Pork', 60, 'recipe_6acd142266c0f7.03585653_100.png', 1),
+(9, 'Chicken Tinola', 'Main Dish', 'Chicken', 50, 'recipe_6acd14f765d270.39604281_100.png', 1),
+(10, 'Bicol Express', 'Main Dish', 'Pork', 60, 'Bicol Express_100.png', 1),
+(11, 'Chicken Afritada', 'Main Dish', 'Chicken', 50, 'placeholder_100.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -87,7 +89,7 @@ ALTER TABLE `registrations`
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `recipeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `recipeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `registrations`

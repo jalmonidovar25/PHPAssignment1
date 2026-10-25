@@ -10,6 +10,7 @@ if (!isset($_SESSION['userID'])) {
 require('database.php');
 
 $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT);
+$userID = $_SESSION['userID'];
 
 if (!$recipeID) {
     header('Location: index.php');
@@ -17,9 +18,12 @@ if (!$recipeID) {
 }
 
 $query = 'SELECT * FROM recipes
-          WHERE recipeID = :recipeID';
+          WHERE recipeID = :recipeID
+          AND userID = :userID';
+
 $statement = $db->prepare($query);
 $statement->bindValue(':recipeID', $recipeID);
+$statement->bindValue(':userID', $userID);
 $statement->execute();
 $recipe = $statement->fetch();
 $statement->closeCursor();

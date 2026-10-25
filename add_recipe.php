@@ -10,6 +10,8 @@ if (!isset($_SESSION['userID'])) {
 require('database.php');
 require('image_util.php');
 
+$userID = $_SESSION['userID'];
+
 $recipeName = filter_input(INPUT_POST, 'recipeName');
 $category = filter_input(INPUT_POST, 'category');
 $mainIngredient = filter_input(INPUT_POST, 'mainIngredient');
@@ -46,9 +48,9 @@ if ($image && $image['error'] == UPLOAD_ERR_OK) {
 }
 
 $query = 'INSERT INTO recipes
-             (recipeName, category, mainIngredient, cookingTime, recipeImage)
+             (recipeName, category, mainIngredient, cookingTime, recipeImage, userID)
           VALUES
-             (:recipeName, :category, :mainIngredient, :cookingTime, :recipeImage)';
+             (:recipeName, :category, :mainIngredient, :cookingTime, :recipeImage, :userID)';
 
 $statement = $db->prepare($query);
 $statement->bindValue(':recipeName', $recipeName);
@@ -56,6 +58,7 @@ $statement->bindValue(':category', $category);
 $statement->bindValue(':mainIngredient', $mainIngredient);
 $statement->bindValue(':cookingTime', $cookingTime);
 $statement->bindValue(':recipeImage', $image_name);
+$statement->bindValue(':userID', $userID);
 $statement->execute();
 $statement->closeCursor();
 

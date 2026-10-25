@@ -1,8 +1,16 @@
 
 <?php
+session_start();
+
+if (!isset($_SESSION['userID'])) {
+    header('Location: login_form.php');
+    exit();
+}
+
 require('database.php');
 
 $recipeID = filter_input(INPUT_GET, 'recipeID', FILTER_VALIDATE_INT);
+$userID = $_SESSION['userID'];
 
 if ($recipeID == null || $recipeID == false) {
     header('Location: index.php');
@@ -10,10 +18,12 @@ if ($recipeID == null || $recipeID == false) {
 }
 
 $query = 'SELECT * FROM recipes
-          WHERE recipeID = :recipeID';
+          WHERE recipeID = :recipeID
+          AND userID = :userID';
 
 $statement = $db->prepare($query);
 $statement->bindValue(':recipeID', $recipeID);
+$statement->bindValue(':userID', $userID);
 $statement->execute();
 $recipe = $statement->fetch();
 $statement->closeCursor();

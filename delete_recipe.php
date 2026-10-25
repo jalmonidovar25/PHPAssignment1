@@ -9,14 +9,18 @@ if (!isset($_SESSION['userID'])) {
 
 require('database.php');
 
+$userID = $_SESSION['userID'];
+
 $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT);
 
 if ($recipeID != false) {
     $query = 'DELETE FROM recipes
-              WHERE recipeID = :recipeID';
+              WHERE recipeID = :recipeID
+              AND userID = :userID';
 
     $statement = $db->prepare($query);
     $statement->bindValue(':recipeID', $recipeID);
+    $statement->bindValue(':userID', $userID);
     $statement->execute();
     $statement->closeCursor();
 }

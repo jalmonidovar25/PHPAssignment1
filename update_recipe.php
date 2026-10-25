@@ -10,6 +10,8 @@ if (!isset($_SESSION['userID'])) {
 require('database.php');
 require('image_util.php');
 
+$userID = $_SESSION['userID'];
+
 $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT);
 $recipeName = filter_input(INPUT_POST, 'recipeName');
 $category = filter_input(INPUT_POST, 'category');
@@ -27,10 +29,12 @@ if ($recipeID == null || $recipeName == null ||
 }
 
 $query = 'SELECT recipeImage FROM recipes
-          WHERE recipeID = :recipeID';
+          WHERE recipeID = :recipeID
+          AND userID = :userID';
 
 $statement = $db->prepare($query);
 $statement->bindValue(':recipeID', $recipeID);
+$statement->bindValue(':userID', $userID);
 $statement->execute();
 $recipe = $statement->fetch();
 $statement->closeCursor();
@@ -83,7 +87,8 @@ $query = 'UPDATE recipes
               mainIngredient = :mainIngredient,
               cookingTime = :cookingTime,
               recipeImage = :recipeImage
-          WHERE recipeID = :recipeID';
+          WHERE recipeID = :recipeID
+          AND userID = :userID';
 
 $statement = $db->prepare($query);
 $statement->bindValue(':recipeName', $recipeName);
@@ -92,6 +97,7 @@ $statement->bindValue(':mainIngredient', $mainIngredient);
 $statement->bindValue(':cookingTime', $cookingTime);
 $statement->bindValue(':recipeImage', $image_name);
 $statement->bindValue(':recipeID', $recipeID);
+$statement->bindValue(':userID', $userID);
 $statement->execute();
 $statement->closeCursor();
 
